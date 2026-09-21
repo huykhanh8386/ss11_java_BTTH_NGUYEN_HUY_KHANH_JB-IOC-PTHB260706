@@ -1,0 +1,22 @@
+public class ExpressVan extends TransportVehicle{
+    public ExpressVan(String vehicleId, String licensePlate, double kmDriven) {
+        super(vehicleId, licensePlate, kmDriven);
+    }
+    @Override
+    public double calculateFuelCost(double fuelPrice) {
+        return (getKmDriven() / 100.0) * 12.0 * fuelPrice;
+    }
+    @Override
+    public boolean needsMaintenance() {
+        return getKmDriven() >= 15000;
+    }
+    @Override
+    public void displayVehicle() {
+        System.out.printf("%-12s | %-18s | %10.0f | ", getLicensePlate(), "Express Van", getKmDriven());
+        if (needsMaintenance()) {
+            System.out.println("[CANH BAO] Can bao duong!");
+        } else {
+            System.out.println("Hoat dong binh thuong");
+        }
+    }
+}
