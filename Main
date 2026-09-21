@@ -1,0 +1,6 @@
+public class Main {
+    public static void main(String[] args) {
+        LogisticsManager manager = new LogisticsManager();
+        manager.run();
+    }
+}
