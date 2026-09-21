@@ -1,0 +1,3 @@
+public interface IFuelConsumable {
+    double calculateFuelCost(double fuelPrice);
+}
