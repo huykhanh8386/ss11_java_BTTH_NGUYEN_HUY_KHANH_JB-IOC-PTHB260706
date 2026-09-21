@@ -1,0 +1,29 @@
+public abstract class TransportVehicle implements  IFuelConsumable, IMaintainable{
+    private String vehicleId;
+    private String licensePlate;
+    private double kmDriven;
+    public TransportVehicle(String vehicleId, String licensePlate, double kmDriven) {
+        this.vehicleId = vehicleId;
+        this.licensePlate = licensePlate;
+        this.kmDriven = kmDriven;
+    }
+    public String getVehicleId() {
+        return vehicleId;
+    }
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+    public double getKmDriven() {
+        return kmDriven;
+    }
+    public void setKmDriven(double kmDriven) {
+        this.kmDriven = kmDriven;
+    }
+    public abstract void displayVehicle();
+}
