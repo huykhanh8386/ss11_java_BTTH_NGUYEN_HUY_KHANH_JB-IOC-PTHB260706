@@ -1,0 +1,31 @@
+public class ContainerTruck extends TransportVehicle{
+    public ContainerTruck(String vehicleId, String licensePlate, double kmDriven) {
+        super(vehicleId, licensePlate, kmDriven);
+    }
+
+    @Override
+    public double calculateFuelCost(double fuelPrice) {
+        return (getKmDriven() / 100.0) * 35.0 * fuelPrice;
+    }
+
+    @Override
+    public boolean needsMaintenance() {
+        return getKmDriven() >= 10000;
+    }
+
+    @Override
+    public void displayVehicle() {
+        System.out.printf(
+                "%-12s | %-18s | %10.0f | ",
+                getLicensePlate(),
+                "Container Truck",
+                getKmDriven()
+        );
+
+        if (needsMaintenance()) {
+            System.out.println("[CANH BAO] Can bao duong!");
+        } else {
+            System.out.println("Hoat dong binh thuong");
+        }
+    }
+}
