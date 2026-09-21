@@ -1,0 +1,105 @@
+import java.util.Scanner;
+public class LogisticsManager {
+    private TransportVehicle[] fleet = new TransportVehicle[100];
+    private int vehicleCount = 0;
+    private Scanner sc = new Scanner(System.in);
+    private final double FUEL_PRICE = 22000;
+    public void addContainerTruck() {
+        if (vehicleCount >= fleet.length) {
+            System.out.println("Danh sach xe da day!");
+            return;
+        }
+        System.out.println("\n--- THEM XE CONTAINER ---");
+        System.out.print("Nhap ma xe: ");
+        String vehicleId = sc.nextLine();
+        System.out.print("Nhap bien so: ");
+        String licensePlate = sc.nextLine();
+        System.out.print("Nhap so km da chay: ");
+        double kmDriven = sc.nextDouble();
+        sc.nextLine();
+        fleet[vehicleCount] = new ContainerTruck(vehicleId, licensePlate, kmDriven);
+        vehicleCount++;
+        System.out.println("-> Them xe Container thanh cong!");
+    }
+    public void addExpressVan() {
+        if (vehicleCount >= fleet.length) {
+            System.out.println("Danh sach xe da day!");
+            return;
+        }
+        System.out.println("\n--- THEM XE EXPRESS VAN ---");
+        System.out.print("Nhap ma xe: ");
+        String vehicleId = sc.nextLine();
+        System.out.print("Nhap bien so: ");
+        String licensePlate = sc.nextLine();
+        System.out.print("Nhap so km da chay: ");
+        double kmDriven = sc.nextDouble();
+        sc.nextLine();
+        fleet[vehicleCount] = new ExpressVan(vehicleId, licensePlate, kmDriven);
+        vehicleCount++;
+        System.out.println("-> Them xe Express Van thanh cong!");
+    }
+    public void displayFleet() {
+        System.out.println("\n+========================================================================+");
+        System.out.println("|             DANH SACH DOAN XE RIKKEI LOGISTICS                        |");
+        System.out.println("+========================================================================+");
+        System.out.println("| Bien So      | Loai Xe            | ODO (km)   | Trang Thai Bao Duong |");
+        System.out.println("+--------------+--------------------+------------+-----------------------+");
+        if (vehicleCount == 0) {
+            System.out.println("|                    CHUA CO XE NAO TRONG DOAN XE                      |");
+        } else {
+            for (int i = 0; i < vehicleCount; i++) {
+                fleet[i].displayVehicle();
+            }
+        }
+    }
+    public void calculateTotalFuelCost() {
+        double totalCost = 0;
+        for (TransportVehicle vehicle : fleet) {
+            if (vehicle != null) {
+                totalCost += vehicle.calculateFuelCost(FUEL_PRICE);
+            }
+        }
+        System.out.println("\n+==============================================================+");
+        System.out.printf("| TONG CHI PHI NHIEN LIEU TOAN DOAN: %,15.2f VNĐ |%n", totalCost);
+        System.out.println("+==============================================================+");
+    }
+    public void showMenu() {
+        System.out.println("\n=========================================================");
+        System.out.println("      HE THONG QUAN LY VAN TAI - RIKKEI LOGISTICS");
+        System.out.println("=========================================================");
+        System.out.println("1. Them Container");
+        System.out.println("2. Them Express Van");
+        System.out.println("3. Danh sach Doan xe");
+        System.out.println("4. Thong ke Nhien lieu");
+        System.out.println("5. Thoat");
+        System.out.println("=========================================================");
+    }
+    public void run() {
+        int choice;
+        do {
+            showMenu();
+            System.out.print("Chon chuc nang (1-5): ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    addContainerTruck();
+                    break;
+                case 2:
+                    addExpressVan();
+                    break;
+                case 3:
+                    displayFleet();
+                    break;
+                case 4:
+                    calculateTotalFuelCost();
+                    break;
+                case 5:
+                    System.out.println("\nCam on ban da su dung chuong trinh!");
+                    break;
+                default:
+                    System.out.println("\nLua chon khong hop le!");
+            }
+        } while (choice != 5);
+    }
+}
